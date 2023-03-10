@@ -4,6 +4,7 @@ specifiers:
   '@mozilla/readability': ^0.4.2
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3
   '@types/chrome': 0.0.210
+  '@types/html-to-text': ^9.0.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -24,6 +25,7 @@ dependencies:
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3_prettier@2.8.3
   '@types/chrome': 0.0.210
+  '@types/html-to-text': 9.0.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
@@ -2027,6 +2029,10 @@ packages:
 
   /@types/har-format/1.2.10:
     resolution: {integrity: sha512-o0J30wqycjF5miWDKYKKzzOU1ZTLuA42HZ4HE7/zqTOc/jTLdQ5NhYWvsRQo45Nfi1KHoRdNhteSI4BAxTF1Pg==}
+    dev: true
+
+  /@types/html-to-text/9.0.0:
+    resolution: {integrity: sha512-FnF3p2FJZ1kJT/0C/lmBzw7HSlH3RhtACVYyrwUsJoCmFNuiLpusWT2FWWB7P9A48CaYpvD6Q2fprn7sZeffpw==}
     dev: true
 
   /@types/http-cache-semantics/4.0.1:

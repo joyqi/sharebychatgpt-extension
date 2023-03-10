@@ -1,13 +1,8 @@
-import { useState } from "react"
+import { useState } from "react";
+import scraper from "./scraper";
 
 async function getDom() {
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  const result = await chrome.scripting.executeScript({
-    target: { tabId: tabs[0].id },
-    func: () => document
-  });
-
-  console.log(result[0].result);
+  console.log(await scraper());
 }
 
 function IndexPopup() {
