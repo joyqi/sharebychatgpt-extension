@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { sendToBackground } from '@plasmohq/messaging';
 
-async function getDom() {
-  const resp = await sendToBackground({
-    name: "scrape"
-  });
-
-  console.log(resp);
-}
-
 function IndexPopup() {
   const [data, setData] = useState("")
+
+  async function getDom() {
+    const resp = await sendToBackground({
+      name: "scrape"
+    });
+
+    setData(resp);
+  }
 
   return (
     <div
       style={{
         display: "flex",
+        width: 400,
+        height: 400,
         flexDirection: "column",
         padding: 16
       }}>
+      <textarea value={data} />
       <button onClick={getDom}>Get DOM</button>
       <h2>
         Welcome to your{" "}
@@ -27,7 +30,6 @@ function IndexPopup() {
         </a>{" "}
         Extension!
       </h2>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
       <a href="https://docs.plasmo.com" target="_blank">
         View Docs
       </a>

@@ -2,6 +2,8 @@ import { convert } from 'html-to-text';
 import { split } from 'sentence-splitter';
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 
+const MAX_LENGTH = 1000;
+
 async function getArticle() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     const result = await chrome.scripting.executeScript({
@@ -60,7 +62,7 @@ async function fetchArticle() {
         ]
     });
 
-    return truncateText(article.title + "\n" + content, 500);
+    return truncateText(article.title + "\n" + content, MAX_LENGTH);
 }
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
