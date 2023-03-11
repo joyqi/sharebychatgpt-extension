@@ -1,8 +1,12 @@
 import { useState } from "react";
-import scraper from "./scraper";
+import { sendToBackground } from '@plasmohq/messaging';
 
 async function getDom() {
-  console.log(await scraper());
+  const resp = await sendToBackground({
+    name: "scrape"
+  });
+
+  console.log(resp);
 }
 
 function IndexPopup() {

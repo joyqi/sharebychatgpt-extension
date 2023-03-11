@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@mozilla/readability': ^0.4.2
+  '@plasmohq/messaging': ^0.1.6
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3
   '@types/chrome': 0.0.210
   '@types/html-to-text': ^9.0.0
@@ -13,14 +14,17 @@ specifiers:
   prettier: 2.8.3
   react: 18.2.0
   react-dom: 18.2.0
+  sentence-splitter: ^4.2.0
   typescript: 4.9.4
 
 dependencies:
   '@mozilla/readability': 0.4.2
+  '@plasmohq/messaging': 0.1.6_react@18.2.0
   html-to-text: 9.0.4
   plasmo: 0.67.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  sentence-splitter: 4.2.0
 
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3_prettier@2.8.3
@@ -1492,6 +1496,17 @@ packages:
     resolution: {integrity: sha512-4fA29jzUU5tHpsJ3rpUEbt/jme/aCDIqolAbTWd6F7M4rJ/33q4mVQ6eIflWjUhVNcygjpjMApdT2gIrNQi0fw==}
     dev: false
 
+  /@plasmohq/messaging/0.1.6_react@18.2.0:
+    resolution: {integrity: sha512-GYryyzijju3dg3RwMGoEIuGct0vgxdBfxZH/54GPh7ZbjYvOVikyfLp7Rn9rsrGqXLdsJ8+YeHUCgQEPvBJakA==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@plasmohq/parcel-bundler/0.4.8:
     resolution: {integrity: sha512-nUf9Z3iOl6R2XNOQ4CEnREj2L4kkivBstx1FiTTT2pD3SeKs17hCWFEaLaZGg0Eum3RheuRtzA9Zlezs2tyoEg==}
     engines: {node: '>= 16.0.0', parcel: '>= 2.7.0'}
@@ -2005,6 +2020,10 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
+  /@textlint/ast-node-types/13.3.1:
+    resolution: {integrity: sha512-/qeEjW3hIFpGwESsCkJRroja7mBOlo9wqyx8G4fwayq4FZRvJMm/9DhIo77jd/4wm/VSJcVVr+fs+rVa4jrY5A==}
+    dev: false
+
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
@@ -2256,6 +2275,10 @@ packages:
 
   /boolbase/1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+    dev: false
+
+  /boundary/2.0.0:
+    resolution: {integrity: sha512-rJKn5ooC9u8q13IMCrW0RSp31pxBCHE3y9V/tp3TdWSLf8Em3p6Di4NBpfzbJge9YjjFEsD0RtFEjtvHL5VyEA==}
     dev: false
 
   /brace-expansion/1.1.11:
@@ -4421,6 +4444,13 @@ packages:
       upper-case-first: 2.0.2
     dev: false
 
+  /sentence-splitter/4.2.0:
+    resolution: {integrity: sha512-1Ww0iofAbR56tu6lVJ9Yh8Sj5ukeVjikBQ4sR5sNWM0kc+2AJe3p5F2o2qyuf5dJ4KVs1RbJpNkwEiMBCz7pKg==}
+    dependencies:
+      '@textlint/ast-node-types': 13.3.1
+      structured-source: 4.0.0
+    dev: false
+
   /sharp/0.31.1:
     resolution: {integrity: sha512-GR8M1wBwOiFKLkm9JPun27OQnNRZdHfSf9VwcdZX6UrRmM1/XnOrLFTF0GAil+y/YK4E6qcM/ugxs80QirsHxg==}
     engines: {node: '>=14.15.0'}
@@ -4557,6 +4587,12 @@ packages:
   /strip-json-comments/2.0.1:
     resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /structured-source/4.0.0:
+    resolution: {integrity: sha512-qGzRFNJDjFieQkl/sVOI2dUjHKRyL9dAJi2gCPGJLbJHBIkyOHxjuocpIEfbLioX+qSJpvbYdT49/YCdMznKxA==}
+    dependencies:
+      boundary: 2.0.0
     dev: false
 
   /sucrase/3.29.0:
