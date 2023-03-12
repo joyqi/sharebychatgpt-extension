@@ -1,14 +1,11 @@
 import { convert } from 'html-to-text';
 import { split } from 'sentence-splitter';
-import type { PlasmoMessaging } from '@plasmohq/messaging';
-
-const MAX_LENGTH = 1000;
 
 async function getArticle() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     const result = await chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
-        func: () => window.__getArticle()
+        func: () => window.__getArticle ? window.__getArticle() : false
     });
 
     return result[0].result;
@@ -43,7 +40,7 @@ function truncateText(text: string, length: number) {
     return result.trim();
 }
 
-async function fetchArticle() {
+export async function fetchArticleText(length: number) {
     const article = await getArticle();
 
     if (!article) {
@@ -62,11 +59,5 @@ async function fetchArticle() {
         ]
     });
 
-    return truncateText(article.title + "\n" + content, MAX_LENGTH);
+    return truncateText(article.title + "\n" + content, length);
 }
-
-const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-    res.send(await fetchArticle());
-};
-
-export default handler

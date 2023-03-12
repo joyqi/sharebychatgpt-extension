@@ -1,4 +1,4 @@
-import { Readability, isProbablyReaderable } from '@mozilla/readability';
+import { Readability } from '@mozilla/readability';
 
 declare global {
     interface Window {
@@ -8,13 +8,7 @@ declare global {
 
 function getArticle() {
     const documentClone = document.cloneNode(true) as Document;
-
-    if (isProbablyReaderable(documentClone)) {
-        const reader = new Readability(documentClone);
-        return reader.parse();
-    }
-
-    return null;
+    return new Readability(documentClone).parse();
 }
 
 // inejct the function into the page

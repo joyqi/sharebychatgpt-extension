@@ -4,6 +4,7 @@ specifiers:
   '@mozilla/readability': ^0.4.2
   '@plasmohq/messaging': ^0.1.6
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3
+  '@plasmohq/storage': ^1.2.3
   '@types/chrome': 0.0.210
   '@types/html-to-text': ^9.0.0
   '@types/node': 18.11.18
@@ -20,6 +21,7 @@ specifiers:
 dependencies:
   '@mozilla/readability': 0.4.2
   '@plasmohq/messaging': 0.1.6_react@18.2.0
+  '@plasmohq/storage': 1.2.3_react@18.2.0
   html-to-text: 9.0.4
   plasmo: 0.67.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -1836,6 +1838,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@plasmohq/storage/1.2.3_react@18.2.0:
+    resolution: {integrity: sha512-/fFoQBfQKJakqab+SWWkDxNERi6wsBYnjKNGSJluRQqzcPXT5ImaA0QsvnikARwb2VYnQof1JnEaZhh46q1CDw==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@pnpm/config.env-replace/1.0.0:
     resolution: {integrity: sha512-ZVPVDi1E8oeXlYqkGRtX0CkzLTwE2zt62bjWaWKaAvI8NZqHzlMvGeSNDpW+JB3+aKanYb4UETJOF1/CxGPemA==}

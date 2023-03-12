@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { sendToBackground } from '@plasmohq/messaging';
+import { usePort } from '@plasmohq/messaging/hook';
+import { useEffect, useState } from 'react';
 
 function IndexPopup() {
-  const [data, setData] = useState("")
+  const scrapePort = usePort('chatgpt');
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    if (typeof scrapePort.data === 'undefined') {
+      return;
+    }
+
+    setData(data + scrapePort.data);
+  }, [scrapePort.data]);
 
   async function getDom() {
-    const resp = await sendToBackground({
-      name: "scrape"
-    });
-
-    setData(resp);
+    scrapePort.send({})
   }
 
   return (
@@ -21,7 +26,7 @@ function IndexPopup() {
         flexDirection: "column",
         padding: 16
       }}>
-      <textarea value={data} />
+      <textarea style={{ height: 200 }} value={data} />
       <button onClick={getDom}>Get DOM</button>
       <h2>
         Welcome to your{" "}
