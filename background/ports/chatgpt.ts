@@ -1,6 +1,6 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 import { fetchArticleText } from '~lib/article';
-import { __ } from '~lib/common';
+import { __, streamAsyncIterable } from '~lib/common';
 import { tokenCache } from '~lib/tokencache';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -81,15 +81,27 @@ async function ask() {
         ],
         model: 'text-davinci-002-render',
         parent_message_id: uuidv4()
-    }
+    };
+
+    return (await request('/conversation', 'POST', body)).body;
 }
 
 const handler: PlasmoMessaging.PortHandler = async (req, res) => {
-    res.send(await fetchArticleText(MAX_LENGTH));
+    const stream = await ask();
+    let conversationId: string | null = null;
 
-    setTimeout(() => {
-        res.send('hello');
-    }, 1000);
+    async function deleteConversation() {
+        if (conversationId) {
+            await request(`/conversation/${conversationId}`, 'PATCH', { is_visible: false });
+        }
+    }
+
+    for await (const message of streamAsyncIterable(stream)) {
+        if (message === '[DONE]') {
+            deleteConversation();
+            return;
+        }
+    }
 };
 
 export default handler
