@@ -10,6 +10,7 @@ specifiers:
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
+  '@types/uuid': ^9.0.1
   html-to-text: ^9.0.4
   plasmo: 0.67.1
   prettier: 2.8.3
@@ -17,6 +18,7 @@ specifiers:
   react-dom: 18.2.0
   sentence-splitter: ^4.2.0
   typescript: 4.9.4
+  uuid: ^9.0.0
 
 dependencies:
   '@mozilla/readability': 0.4.2
@@ -27,6 +29,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   sentence-splitter: 4.2.0
+  uuid: 9.0.0
 
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3_prettier@2.8.3
@@ -35,6 +38,7 @@ devDependencies:
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
+  '@types/uuid': 9.0.1
   prettier: 2.8.3
   typescript: 4.9.4
 
@@ -2103,6 +2107,10 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
+
+  /@types/uuid/9.0.1:
+    resolution: {integrity: sha512-rFT3ak0/2trgvp4yYZo5iKFEPsET7vKydKF+VRCxlQ9bpheehyAJH89dAkaLEq/j/RZXJIqcgsmPJKUP1Z28HA==}
     dev: true
 
   /@vue/compiler-core/3.2.47:
@@ -4886,6 +4894,11 @@ packages:
   /utility-types/3.10.0:
     resolution: {integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==}
     engines: {node: '>= 4'}
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /wcwidth/1.0.1:
