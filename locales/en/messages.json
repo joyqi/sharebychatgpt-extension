@@ -14,7 +14,13 @@
     "waitingWebReady": {
         "message": "Web page is still loading. Please wait..."
     },
-    "generating": {
-        "message": "Generating text..."
+    "btnGenerate": {
+        "message": "Generate sharing text by ChatGPT"
+    },
+    "btnWaiting": {
+        "message": "Waiting response from ChatGPT..."
+    },
+    "btnShare": {
+        "message": "Share"
     }
 }

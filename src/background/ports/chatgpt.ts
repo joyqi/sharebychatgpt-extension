@@ -8,10 +8,10 @@ import type { Request, Response } from '~lib/message';
 const MAX_LENGTH = 500;
 const CACHE_TTL = 1000 * 10;
 const CACHE_KEY = 'chatgpt-token';
-const PROMPT = 'You are a social media writer. '
-    + 'Your write post in Chinese for the article I give you, and only output text. '
-    + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
-    + 'Now write a post for the following article: ';
+const PROMPT = 'You are a summary writer. '
+    + 'Your write summary in Chinese for the article I give you, and only output text. '
+    + 'The summary you are writing should be less than 140 characters, and make sure it is concise and catchy. '
+    + 'Now write a summary for the following article: ';
 
 const Endpoints = {
     Auth: 'https://chat.openai.com/api/auth/session',

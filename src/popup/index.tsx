@@ -4,39 +4,43 @@ import type { Request, Response } from '~lib/message';
 import { getArticle } from '~lib/article';
 import { __ } from '~lib/common';
 
-import "./style.css";
+import "./style.scss";
 
 function IndexPopup() {
     const ai = usePort<Request, Response>('chatgpt');
-    const [data, setData] = useState(__('generating'));
+    const [data, setData] = useState('');
     const [article, setArticle] = useState(false);
     const [readOnly, setReadOnly] = useState(true);
     const [disabled, setDisabled] = useState(true);
+    const [message, setMessage] = useState(__('waitingWebReady'));
+    const [btn, setBtn] = useState(__('btnGenerate'));
 
-    setTimeout(async () => {
-        if (!article) {
+    if (!article) {
+        const intv = setInterval(async () => {
             const current = await getArticle();
 
             if (current !== false) {
                 setArticle(current);
+                clearInterval(intv);
             }
-        }
-    }, 100);
+        }, 50);
+    }
 
     useEffect(() => {
         if (article) {
             setDisabled(false);
+            setMessage(null);
         }
     }, [article]);
 
     function ask() {
         ai.send({ type: 'ask', data: article });
         setDisabled(true);
+        setBtn(__('btnWaiting'));
     }
 
     useEffect(() => {
         if (!ai.data) {
-            setData(__('generating'));
             return;
         }
 
@@ -46,9 +50,11 @@ function IndexPopup() {
                 break;
             case 'end':
                 setReadOnly(false);
+                setDisabled(false);
+                setBtn(__('btnShare'));
                 break;
             case 'error':
-                setData(ai.data.data);
+                setMessage(ai.data.data);
                 break;
             default:
                 break;
@@ -56,12 +62,13 @@ function IndexPopup() {
     }, [ai.data]);
 
     return (
-      <div className='flex h-72 w-96 p-4'>
-            <p className='w-full mb-4'>
-                <textarea className='w-full h-36 text-sm resize-none rounded-md' value={data} readOnly={readOnly} />
+      <div className='window'>
+            { message ? <div className='mask'><div className='dialog' dangerouslySetInnerHTML={{__html: message}} /></div> : null }
+            <p>
+                <textarea value={data} readOnly={readOnly} />
             </p>
-            <p className='w-full'>
-                <button onClick={ask} disabled={disabled}>Hello</button>
+            <p>
+                <button onClick={ask} disabled={disabled}>{btn}</button>
             </p>
       </div>
     )
