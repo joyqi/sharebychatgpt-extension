@@ -13,6 +13,7 @@
     "@mozilla/readability": "^0.4.2",
     "@plasmohq/messaging": "^0.1.6",
     "@plasmohq/storage": "^1.2.3",
+    "eventsource-parser": "^0.1.0",
     "html-to-text": "^9.0.4",
     "plasmo": "0.67.1",
     "react": "18.2.0",
@@ -22,13 +23,17 @@
   },
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "3.6.3",
+    "@tailwindcss/forms": "^0.5.3",
     "@types/chrome": "0.0.210",
     "@types/html-to-text": "^9.0.0",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "@types/uuid": "^9.0.1",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
     "prettier": "2.8.3",
+    "tailwindcss": "^3.2.7",
     "typescript": "4.9.4"
   },
   "manifest": {

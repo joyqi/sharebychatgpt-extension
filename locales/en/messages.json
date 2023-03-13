@@ -1,11 +1,20 @@
 {
-    "errorCloudflare": {
+    "chatgptErrorCloudflare": {
         "message": "Please login and pass Cloudflare check at <a href=\"https://chat.openai.com\" target=\"_blank\">chat.openai.com</a>"
     },
-    "errorAuth": {
+    "chatgptErrorAuth": {
         "message": "Please login and pass Cloudflare check at <a href=\"https://chat.openai.com\" target=\"_blank\">chat.openai.com</a>"
+    },
+    "chatgptErrorBusy": {
+        "message": "Too many requests at the moment. Please try again later."
     },
     "errorArticle": {
         "message": "We can't scrape any articles from current page. Please try another page."
+    },
+    "waitingWebReady": {
+        "message": "Web page is still loading. Please wait..."
+    },
+    "generating": {
+        "message": "Generating text..."
     }
 }

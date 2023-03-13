@@ -1,8 +1,13 @@
 import { convert } from 'html-to-text';
 import { split } from 'sentence-splitter';
 
-async function getArticle() {
+export async function getArticle() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    if (tabs.length === 0) {
+        return false;
+    }
+
     const result = await chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         func: () => window.__getArticle ? window.__getArticle() : false
@@ -40,13 +45,7 @@ function truncateText(text: string, length: number) {
     return result.trim();
 }
 
-export async function fetchArticleText(length: number) {
-    const article = await getArticle();
-
-    if (!article) {
-        return null;
-    }
-
+export function generatePromptByArticle(prompt: string, article: any, length: number) {
     const content = convert(article.content, {
         wordwrap: false,
         selectors: [
@@ -59,5 +58,5 @@ export async function fetchArticleText(length: number) {
         ]
     });
 
-    return truncateText(article.title + "\n" + content, length);
+    return prompt + truncateText(article.title + "\n" + content, length);
 }
