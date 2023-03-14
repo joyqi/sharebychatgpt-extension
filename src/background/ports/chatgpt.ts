@@ -1,15 +1,13 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 import { generatePromptByArticle } from '~lib/article';
 import { __, fetchStreamMessage, once } from '~lib/common';
-import { tokenCache } from '~lib/tokencache';
+import { cache } from '~lib/expirycache';
 import { v4 as uuidv4 } from 'uuid';
 import type { Article, Request, Response } from '~lib/message';
 
 const MAX_LENGTH = 500;
-const CACHE_TTL = 1000 * 10;
-const CACHE_KEY = 'chatgpt-token';
 const PROMPT = 'You are a social media writer. '
-    + 'Your write the summary post in Chinese for the article I give you, and do not put quotes around your post. '
+    + 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you, and do not put quotes around your post. '
     + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
     + 'Now write a post for the following article: ';
 
@@ -19,7 +17,7 @@ const Endpoints = {
 };
 
 async function getAccessToken(signal: AbortSignal) {
-    const [token, setToken] = await tokenCache(CACHE_KEY, CACHE_TTL);
+    const [token, setToken] = await cache('chatgpt-token', 60 * 1000);
 
     if (token) {
         return token;
@@ -40,7 +38,7 @@ async function getAccessToken(signal: AbortSignal) {
 }
 
 async function getModel() {
-    const [model, setModel] = await tokenCache('chatgpt-model', 12 * 60 * 60 * 1000);
+    const [model, setModel] = await cache('chatgpt-model', 12 * 60 * 60 * 1000);
 
     if (model) {
         return model;

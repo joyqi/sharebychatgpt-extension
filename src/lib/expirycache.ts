@@ -7,7 +7,7 @@ type CacheItem = {
 
 const storage = new Storage();
 
-export async function tokenCache(key: string, ttl: number) {
+export async function cache(key: string, ttl: number) {
     const cached = await storage.get<CacheItem>(key);
     let token: string | null = null;
 

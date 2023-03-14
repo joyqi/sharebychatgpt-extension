@@ -1,0 +1,26 @@
+{
+    "langInEnglish": {
+        "message": "Chinese"
+    },
+    "chatgptErrorCloudflare": {
+        "message": "请登录并通过 Cloudflare 检查，访问<a href=\"https://chat.openai.com\" target=\"_blank\">chat.openai.com</a>"
+    },
+    "chatgptErrorAuth": {
+        "message": "请登录并通过 Cloudflare 检查，访问<a href=\"https://chat.openai.com\" target=\"_blank\">chat.openai.com</a>"
+    },
+    "chatgptErrorBusy": {
+        "message": "当前请求过多，请稍后再试。"
+    },
+    "errorArticle": {
+        "message": "无法从当前页面获取任何文章，请重新加载当前页面或尝试其他页面。"
+    },
+    "waitingWebReady": {
+        "message": "网页仍在加载中，请等待..."
+    },
+    "btnGenerate": {
+        "message": "使用 ChatGPT 生成分享文本"
+    },
+    "btnTwitter": {
+        "message": "发推"
+    }
+}

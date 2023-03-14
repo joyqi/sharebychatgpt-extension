@@ -102,19 +102,32 @@ body {
         font-size: 1.5rem;
     }
 
-    button {
+    button, .button {
         cursor: pointer;
         border-radius: 5px;
         border: none;
-        padding: .5rem;
+        padding: .5rem 1rem;
         color: #fff;
         background-color: #513ae3;
         font-weight: bold;
         font-size: .8rem;
+        text-decoration: none;
 
         &:hover {
             background-color: #675fef;
-        } 
+        }
+
+        &:visited {
+            color: #fff;
+        }
+
+        &.share {
+            border-radius: 20px;
+        }
+
+        &.twitter {
+            background-color: #5098eb;
+        }
     }
 
     .full {
@@ -123,10 +136,6 @@ body {
 
         &:last-child {
             margin-bottom: 0;
-        }
-
-        button {
-            width: 100%;
         }
     }
 }

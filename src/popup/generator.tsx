@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { Article, Request, Response } from '~lib/message';
 import { __ } from '~lib/common';
 import { usePort } from '@plasmohq/messaging/hook';
+import { Twitter } from './buttons';
 
 type Step = 'choosing' | 'waiting' | 'generating' | 'done';
 
@@ -51,7 +52,7 @@ export default function Generator({ article }: Props) {
         }
     }, [ai.data]);
 
-    function Step() {
+    function makeStep() {
         switch (step) {
             case 'choosing':
                 return <div className='mask'>
@@ -67,18 +68,18 @@ export default function Generator({ article }: Props) {
                 </div>;
             default:
                 return <div>
-                    <p className='full'>
+                    <div className='full'>
                         <textarea value={data} />
-                    </p>
-                    <p className='full'>
-                        <button>{__('btnShare')}</button>
-                    </p>
+                    </div>
+                    <div className='full'>
+                        <Twitter text={data} url={article.url}></Twitter>
+                    </div>
                 </div>;
         }
     }
 
     return <div className={step}>
         {error ? <div className='error' onClick={dissmiss} dangerouslySetInnerHTML={{ __html: error }} /> : null}
-        {Step()}
+        {makeStep()}
     </div>;
 }
