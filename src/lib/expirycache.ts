@@ -9,15 +9,15 @@ const storage = new Storage();
 
 export async function cache(key: string, ttl: number) {
     const cached = await storage.get<CacheItem>(key);
-    let token: string | null = null;
+    let val: any = null;
 
     if (cached && cached.time + ttl > Date.now()) {
-        token = cached.value;
+        val = cached.value;
     }
 
-    function set(value: any) {
-        storage.set(key, { value, time: Date.now() });
+    async function set(value: any) {
+       await storage.set(key, { value, time: Date.now() });
     }
 
-    return [token, set] as const;
+    return [val, set] as const;
 }

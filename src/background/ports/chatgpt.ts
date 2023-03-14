@@ -5,7 +5,6 @@ import { cache } from '~lib/expirycache';
 import { v4 as uuidv4 } from 'uuid';
 import type { Article, Request, Response } from '~lib/message';
 
-const MAX_LENGTH = 500;
 const PROMPT = 'You are a social media writer. '
     + 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you, and do not put quotes around your post. '
     + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
@@ -33,7 +32,7 @@ async function getAccessToken(signal: AbortSignal) {
         throw new Error(__('chatgptErrorAuth'));
     }
 
-    setToken(data.accessToken);
+    await setToken(data.accessToken);
     return data.accessToken;
 }
 
@@ -47,9 +46,13 @@ async function getModel() {
     try {
         const response = await request('/models', 'GET');
         const data = await response.json();
+        const currentModel = [
+            data.models[0].slug,
+            data.models[0].description.indexOf('Plus') >= 0
+        ];
 
-        setModel(data[0].slug);
-        return data[0].slug;
+        await setModel(currentModel);
+        return currentModel;
     } catch {
         return 'text-davinci-002-render';
     }
@@ -78,6 +81,8 @@ async function request(path: string, method: string, body?: any, signal?: AbortS
 }
 
 async function ask(article: Article, signal: AbortSignal) {
+    const [modelName, isPlus] = await getModel();
+
     const body = {
         action: 'next',
         messages: [
@@ -86,11 +91,11 @@ async function ask(article: Article, signal: AbortSignal) {
                 role: 'user',
                 content: {
                     content_type: 'text',
-                    parts: [generatePromptByArticle(PROMPT, article, MAX_LENGTH)]
+                    parts: [generatePromptByArticle(PROMPT, article, isPlus ? 1000 : 500)]
                 }
             }
         ],
-        model: await getModel(),
+        model: modelName,
         parent_message_id: uuidv4()
     };
 
