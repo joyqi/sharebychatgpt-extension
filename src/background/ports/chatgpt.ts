@@ -3,15 +3,15 @@ import { generatePromptByArticle } from '~lib/article';
 import { __, fetchStreamMessage, once } from '~lib/common';
 import { tokenCache } from '~lib/tokencache';
 import { v4 as uuidv4 } from 'uuid';
-import type { Request, Response } from '~lib/message';
+import type { Article, Request, Response } from '~lib/message';
 
 const MAX_LENGTH = 500;
 const CACHE_TTL = 1000 * 10;
 const CACHE_KEY = 'chatgpt-token';
-const PROMPT = 'You are a summary writer. '
-    + 'Your write summary in Chinese for the article I give you, and only output text. '
-    + 'The summary you are writing should be less than 140 characters, and make sure it is concise and catchy. '
-    + 'Now write a summary for the following article: ';
+const PROMPT = 'You are a social media writer. '
+    + 'Your write the summary post in Chinese for the article I give you, and do not put quotes around your post. '
+    + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
+    + 'Now write a post for the following article: ';
 
 const Endpoints = {
     Auth: 'https://chat.openai.com/api/auth/session',
@@ -79,7 +79,7 @@ async function request(path: string, method: string, body?: any, signal?: AbortS
     return response;
 }
 
-async function ask(article: any, signal: AbortSignal) {
+async function ask(article: Article, signal: AbortSignal) {
     const body = {
         action: 'next',
         messages: [

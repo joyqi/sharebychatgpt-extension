@@ -1,3 +1,5 @@
+import type { Readability } from "@mozilla/readability";
+
 export type ResponseType = 'message' | 'error' | 'end';
 
 export type Response = {
@@ -11,3 +13,5 @@ export type Request = {
     type: RequestType;
     data?: any;
 }
+
+export type Article = ReturnType<Readability['parse']> & { url: string };

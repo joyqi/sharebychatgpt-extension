@@ -1,19 +1,25 @@
 * {
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 1rem;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif;
 }
 
 html {
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .window {
-    width: 400px;
-    height: 300px;
+    width: 25rem;
+    height: 18rem;
+    font-size: 1rem;
+    padding: .8rem;
 
     .mask {
         position: fixed;
@@ -34,34 +40,51 @@ html {
         }
     }
 
-    textarea {
+    .error {
+        cursor: pointer;
+        position: fixed;
+        z-index: 2000;
+        font-size: .8rem;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 200px;
-        resize: none;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        padding: .5rem;
+        text-align: center;
+        color: #903127;
+        background-color: #f6cdcb;
+        border-bottom: 1px solid #e77a74;
+    }
 
-        &:read-only {
-            opacity: 0.5;
+    i.waiting {
+        background-image: url(./images/brain.svg);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: inline-block;
+        animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
         }
     }
 
-    button {
-        width: 100%;
-        cursor: pointer;
-        border-radius: 5px;
-        border: none;
-        padding: 10px 5px;
-        color: #fff;
-        background-color: #513ae3;
-        font-weight: bold;
-
-        &:hover {
-            background-color: #675fef;
+    .generating {
+        textarea {
+            user-select: none;
+            opacity: 0.5;
         }
 
-        &:disabled {
+        button {
             cursor: not-allowed;
+            pointer-events: none;
             opacity: 0.5;
 
             &:hover {
@@ -70,12 +93,40 @@ html {
         }
     }
 
-    p {
-        margin: 0 0 10px 0;
+    textarea {
+        width: 100%;
+        height: 13rem;
+        resize: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1.5rem;
+    }
+
+    button {
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        padding: .5rem;
+        color: #fff;
+        background-color: #513ae3;
+        font-weight: bold;
+        font-size: .8rem;
+
+        &:hover {
+            background-color: #675fef;
+        } 
+    }
+
+    .full {
+        margin: 0 0 1rem 0;
         padding: 0;
 
         &:last-child {
             margin-bottom: 0;
+        }
+
+        button {
+            width: 100%;
         }
     }
 }

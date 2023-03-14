@@ -1,7 +1,8 @@
 import { convert } from 'html-to-text';
 import { split } from 'sentence-splitter';
+import type { Article } from './message';
 
-export async function getArticle() {
+export async function getArticle(): Promise<Article | false> {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
 
     if (tabs.length === 0) {
@@ -45,7 +46,7 @@ function truncateText(text: string, length: number) {
     return result.trim();
 }
 
-export function generatePromptByArticle(prompt: string, article: any, length: number) {
+export function generatePromptByArticle(prompt: string, article: Article, length: number) {
     const content = convert(article.content, {
         wordwrap: false,
         selectors: [
