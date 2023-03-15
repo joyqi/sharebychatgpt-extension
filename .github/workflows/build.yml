@@ -56,6 +56,13 @@ jobs:
           name: sharebychatgpt-firefox-${{ github.run_number }}
           path: build/firefox-mv2-prod.zip
 
+      - name: Generate version
+        if: github.event_name == 'release'
+        run: |
+          tmp=$(mktemp)
+          jq --arg version "${{ github.event.release.tag_name }}" '.version = $version' package.json > $tmp
+          mv $tmp package.json
+
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
         if: github.event_name == 'release'
