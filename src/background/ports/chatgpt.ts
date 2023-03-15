@@ -6,9 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 import type { Article, Request, Response } from '~lib/message';
 
 const PROMPT = 'You are a social media writer. '
-    + 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you, and do not put quotes around your post. '
+    + 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you. '
     + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
-    + 'Now write a post for the following article: ';
+    + 'Now write a post without around quotes for the following article: ';
 
 const Endpoints = {
     Auth: 'https://chat.openai.com/api/auth/session',
@@ -48,7 +48,7 @@ async function getModel() {
         const data = await response.json();
         const currentModel = [
             data.models[0].slug,
-            data.models[0].description.indexOf('Plus') >= 0
+            !!data.models[0].description.match(/available\s+to\s+plus/i)
         ];
 
         await setModel(currentModel);
