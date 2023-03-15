@@ -28,7 +28,9 @@ jobs:
 
       - name: Build
         run: |
+          pnpm build --target=chrome-mv3
           pnpm package --target=chrome-mv3
+          pnpm build --target=firefox-mv2
           pnpm package --target=firefox-mv2
 
       - name: Upload artifacts
