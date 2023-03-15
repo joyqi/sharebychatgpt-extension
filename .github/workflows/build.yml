@@ -12,8 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup Node.JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest-stable
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: |
+          pnpm package --target=chrome-mv3
+          pnpm package --target=firefox-mv2
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: browser-platform-publish
+          path: build/*.zip
+
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
+        if: github.event_name == 'release' && env.BPP_TOKEN != null
         with:
           artifact: zip
           keys: ${{ secrets.BPP_KEYS }}
