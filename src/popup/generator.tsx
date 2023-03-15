@@ -26,6 +26,10 @@ export default function Generator({ article }: Props) {
         setStep('choosing');
     }
 
+    function changeText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+        setData(e.target.value);
+    }
+
     useEffect(() => {
         if (!ai.data) {
             return;
@@ -69,7 +73,7 @@ export default function Generator({ article }: Props) {
             default:
                 return <div>
                     <div className='full'>
-                        <textarea value={data} />
+                        <textarea value={data} onChange={changeText} />
                     </div>
                     <div className='full'>
                         <Twitter text={data} url={article.url}></Twitter>

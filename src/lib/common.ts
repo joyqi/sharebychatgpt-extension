@@ -1,7 +1,11 @@
 import { createParser } from 'eventsource-parser';
 
+export function getBrowswer() {
+    return browser || chrome;
+}
+
 export function __(name: string) {
-    return chrome.i18n.getMessage(name);
+    return getBrowswer().i18n.getMessage(name);
 }
 
 export async function* streamAsyncIterable(stream: ReadableStream) {

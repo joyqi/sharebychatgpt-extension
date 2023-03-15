@@ -6,6 +6,7 @@ specifiers:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3
   '@plasmohq/storage': ^1.2.3
   '@types/chrome': 0.0.210
+  '@types/firefox-webext-browser': ^111.0.0
   '@types/html-to-text': ^9.0.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
@@ -39,6 +40,7 @@ dependencies:
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.3_prettier@2.8.3
   '@types/chrome': 0.0.210
+  '@types/firefox-webext-browser': 111.0.0
   '@types/html-to-text': 9.0.0
   '@types/node': 18.11.18
   '@types/react': 18.0.27
@@ -2116,6 +2118,10 @@ packages:
 
   /@types/filewriter/0.0.29:
     resolution: {integrity: sha512-BsPXH/irW0ht0Ji6iw/jJaK8Lj3FJemon2gvEqHKpCdDCeemHa+rI3WBGq5z7cDMZgoLjY40oninGxqk+8NzNQ==}
+    dev: true
+
+  /@types/firefox-webext-browser/111.0.0:
+    resolution: {integrity: sha512-KboW0ughUYzuYAvzWGJsiSMmH9AgJDvnstjsNrXMgf6cpJ5g1eBGzkqpjPzVqkOyTH/mFl7gd15+XyaVQhKywA==}
     dev: true
 
   /@types/har-format/1.2.10:

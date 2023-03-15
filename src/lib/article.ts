@@ -1,15 +1,16 @@
 import { convert } from 'html-to-text';
 import { split } from 'sentence-splitter';
 import type { Article } from './message';
+import { getBrowswer } from './common';
 
 export async function getArticle(): Promise<Article | false> {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    const tabs = await getBrowswer().tabs.query({ active: true, currentWindow: true });
 
     if (tabs.length === 0) {
         return false;
     }
 
-    const result = await chrome.scripting.executeScript({
+    const result = await getBrowswer().scripting.executeScript({
         target: { tabId: tabs[0].id },
         func: () => window.__getArticle ? window.__getArticle() : false
     });
