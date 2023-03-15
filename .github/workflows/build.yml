@@ -68,4 +68,5 @@ jobs:
         if: github.event_name == 'release'
         with:
           artifact: zip
+          chrome-file: build/chrome-mv3-prod.zip
           keys: ${{ secrets.BPP_KEYS }}
