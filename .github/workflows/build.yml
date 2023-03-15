@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.JS
         uses: actions/setup-node@v3
         with:
-          node-version: latest-stable
+          node-version: lts/*
       
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
@@ -39,7 +39,7 @@ jobs:
 
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
-        if: github.event_name == 'release' && env.BPP_TOKEN != null
+        if: github.event_name == 'release'
         with:
           artifact: zip
           keys: ${{ secrets.BPP_KEYS }}
