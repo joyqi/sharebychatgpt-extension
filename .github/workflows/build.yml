@@ -26,18 +26,27 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
+      - name: Build Chrome
         run: |
           pnpm build --target=chrome-mv3
           pnpm package --target=chrome-mv3
+
+      - name: Upload Chrome artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: sharebychatgpt-chrome-${{ github.run_number }}
+          path: build/chrome-mv3-prod.zip
+      
+      - name: Build Firefox
+        run: |
           pnpm build --target=firefox-mv2
           pnpm package --target=firefox-mv2
 
-      - name: Upload artifacts
+      - name: Upload Firefox artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: browser-platform-publish
-          path: build/*.zip
+          name: sharebychatgpt-firefox-${{ github.run_number }}
+          path: build/firefox-mv2-prod.zip
 
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
