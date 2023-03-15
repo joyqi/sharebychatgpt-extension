@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Article, Request, Response } from '~lib/message';
-import { __ } from '~lib/common';
+import { getBrowswer, __ } from '~lib/common';
 import { usePort } from '@plasmohq/messaging/hook';
 import { Twitter } from './buttons';
 

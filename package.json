@@ -12,7 +12,6 @@
   "dependencies": {
     "@mozilla/readability": "^0.4.2",
     "@plasmohq/messaging": "^0.1.6",
-    "@plasmohq/storage": "^1.2.3",
     "eventsource-parser": "^0.1.0",
     "html-to-text": "^9.0.4",
     "plasmo": "0.67.1",
@@ -37,16 +36,12 @@
     "typescript": "4.9.4"
   },
   "manifest": {
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "your-id@example.com"
-      }
-    },
     "default_locale": "en",
     "host_permissions": [
       "https://*/*"
     ],
     "permissions": [
+      "storage",
       "activeTab",
       "scripting"
     ]

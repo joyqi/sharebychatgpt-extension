@@ -91,7 +91,7 @@ async function ask(article: Article, signal: AbortSignal) {
                 role: 'user',
                 content: {
                     content_type: 'text',
-                    parts: [generatePromptByArticle(PROMPT, article, isPlus ? 1000 : 500)]
+                    parts: [generatePromptByArticle(PROMPT, article, isPlus ? 900 : 500)]
                 }
             }
         ],
@@ -113,6 +113,7 @@ function tryParseMessage(message: string) {
 const handler: PlasmoMessaging.PortHandler<Request, Response> = async (req, res) => {
     const controller = new AbortController();
     let conversationId: string | null = null;
+    let disconnected = false;
 
     const endConversation = once((abort: boolean) => {
         if (conversationId) {
@@ -124,7 +125,10 @@ const handler: PlasmoMessaging.PortHandler<Request, Response> = async (req, res)
         }
     });
 
-    req.port.onDisconnect.addListener(() => endConversation(true));
+    req.port.onDisconnect.addListener(() => {
+        disconnected = true;
+        endConversation(true);
+    });
 
     try {
         const stream = await ask(req.body.data, controller.signal);
@@ -144,8 +148,10 @@ const handler: PlasmoMessaging.PortHandler<Request, Response> = async (req, res)
             }
         });
     } catch (e) {
-        res.send({ type: 'error', data: e.message });
-        endConversation(true);
+        if (!disconnected) {
+            res.send({ type: 'error', data: e.message });
+            endConversation(true);
+        }
     }
 };
 

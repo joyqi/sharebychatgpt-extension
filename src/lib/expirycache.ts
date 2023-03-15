@@ -1,22 +1,28 @@
-import { Storage } from '@plasmohq/storage';
+import { getBrowswer } from './common';
 
 type CacheItem = {
     value: any;
     time: number;
 };
 
-const storage = new Storage();
+type CacheResult = {
+    [key: string]: CacheItem;
+};
+
+const storage = getBrowswer().storage.local;
 
 export async function cache(key: string, ttl: number) {
-    const cached = await storage.get<CacheItem>(key);
+    const cached: CacheResult | undefined = await storage.get(key);
     let val: any = null;
 
-    if (cached && cached.time + ttl > Date.now()) {
-        val = cached.value;
+    if (cached && cached[key] && cached[key].time + ttl > Date.now()) {
+        val = cached[key].value;
     }
 
     async function set(value: any) {
-       await storage.set(key, { value, time: Date.now() });
+        await storage.set({
+            [key]: { value, time: Date.now() }
+        });
     }
 
     return [val, set] as const;

@@ -1,7 +1,7 @@
 import { createParser } from 'eventsource-parser';
 
 export function getBrowswer() {
-    return browser || chrome;
+    return typeof browser !== 'undefined' ? browser : chrome;
 }
 
 export function __(name: string) {
@@ -27,7 +27,6 @@ export async function* streamAsyncIterable(stream: ReadableStream) {
 
 export async function fetchStreamMessage(stream: ReadableStream, fn: (message: string) => void) {
     const parser = createParser((event) => {
-        console.log(event);
         if (event.type === 'event') {
             fn(event.data);
         }
