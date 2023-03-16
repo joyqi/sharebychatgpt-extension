@@ -4,9 +4,8 @@ A browser extension summarize web pages with ChatGPT for easy sharing on social 
 
 ## Installation
 
-* [Chrome](https://chrome.google.com/webstore/detail/chatgpt-share-by-chatgpt/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgjg)
+* [Chrome](https://chrome.google.com/webstore/detail/share-by-chatgpt/gflipcaadffoldodbknnlpfgcfdomekc)
 * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/share-by-chatgpt/)
-* [Edge](https://microsoftedge.microsoft.com/addons/detail/chatgpt-share-by-chatgpt/ndjgjgjgjgjgjgjgjgjgjgjgjgjgjgj)
 
 ## Screenshots
 
