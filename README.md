@@ -26,4 +26,18 @@ This extension is built with [Plasmo](https://www.plasmo.com/), a browser extens
 pnpm build
 ```
 
-The built extension will be in the `build` folder.
+The built extension will be in the `build` folder. The default build target is `chrome-mv3`. If you want to build for other targets, you can run the following command:
+
+```bash
+pnpm build-chrome
+# OR
+pnpm build-firefox
+```
+
+If you want to package the extension, you can run the following command:
+
+```bash
+pnpm package-chrome
+# OR
+pnpm package-firefox
+```

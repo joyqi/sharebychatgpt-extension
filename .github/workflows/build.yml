@@ -34,10 +34,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build Chrome
+      - name: Package Chrome
         run: |
-          pnpm build --target=chrome-mv3
-          pnpm package --target=chrome-mv3
+          pnpm build-chrome
+          pnpm package-chrome
 
       - name: Upload Chrome artifacts
         uses: actions/upload-artifact@v2
@@ -45,10 +45,10 @@ jobs:
           name: sharebychatgpt-chrome-${{ github.run_number }}
           path: build/chrome-mv3-prod.zip
       
-      - name: Build Firefox
+      - name: Package Firefox
         run: |
-          pnpm build --target=firefox-mv2
-          pnpm package --target=firefox-mv2
+          pnpm build-firefox
+          pnpm package-firefox
 
       - name: Upload Firefox artifacts
         uses: actions/upload-artifact@v2
