@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Article, Request, Response } from '~lib/message';
-import { getBrowswer, __ } from '~lib/common';
+import { __ } from '~lib/common';
 import { usePort } from '@plasmohq/messaging/hook';
 import { Twitter } from './buttons';
 import { option } from '~lib/options';
@@ -83,7 +83,7 @@ export default function Generator({ article }: Props) {
                 return <div className='mask'>
                     <div className='dialog'>
                         <div className='full'>
-                            <button onClick={generate}>{__('btnGenerate')}</button>
+                            <button onClick={generate}>{__(useOpenAI ? 'btnOpenAIGenerate' : 'btnChatGPTGenerate')}</button>
                         </div>
                         <div className='full'>
                             <input type='checkbox' checked={useOpenAI} onChange={checkOpenAI} id='check-openai' />

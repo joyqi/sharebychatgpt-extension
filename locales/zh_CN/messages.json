@@ -17,7 +17,7 @@
     "waitingWebReady": {
         "message": "网页仍在加载中，请等待..."
     },
-    "btnGenerate": {
+    "btnChatGPTGenerate": {
         "message": "使用 ChatGPT 生成分享文本"
     },
     "btnTwitter": {
@@ -40,5 +40,8 @@
     },
     "openAIErrorServer": {
         "message": "OpenAI API 服务器错误，请稍后再试。"
+    },
+    "btnOpenAIGenerate": {
+        "message": "使用 OpenAI API 生成分享文本"
     }
 }

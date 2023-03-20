@@ -15,7 +15,7 @@ function makeMessages(text: string) {
             role: 'user',
             content: 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you. '
             + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
-            + 'Now write a post without around quotes for the following article: ' + text
+            + 'Now write a post in ' + __('langInEnglish') + ' without around quotes for the following article: ' + text
         }
     ]
 }
@@ -32,7 +32,7 @@ async function getKey() {
 
 async function getModel(signal: AbortSignal) {
     // const models = await request('/models', 'GET', undefined, signal);
-    return 'gpt-3.5-turbo';
+    return 'gpt-3.5-turbo-0301';
 }
 
 // Request to ChatGPT API with access token

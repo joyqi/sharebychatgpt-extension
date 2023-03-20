@@ -17,7 +17,7 @@
     "waitingWebReady": {
         "message": "Web page is still loading, please wait..."
     },
-    "btnGenerate": {
+    "btnChatGPTGenerate": {
         "message": "Generate sharing text by ChatGPT"
     },
     "btnTwitter": {
@@ -40,5 +40,8 @@
     },
     "openAIErrorServer": {
         "message": "OpenAI API server error, please try again later."
+    },
+    "btnOpenAIGenerate": {
+        "message": "Generate sharing text by OpenAI"
     }
 }
