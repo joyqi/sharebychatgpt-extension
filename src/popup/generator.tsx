@@ -3,6 +3,7 @@ import type { Article, Request, Response } from '~lib/message';
 import { getBrowswer, __ } from '~lib/common';
 import { usePort } from '@plasmohq/messaging/hook';
 import { Twitter } from './buttons';
+import { option } from '~lib/options';
 
 type Step = 'choosing' | 'waiting' | 'generating' | 'done';
 
@@ -11,10 +12,12 @@ type Props = {
 }
 
 export default function Generator({ article }: Props) {
-    const ai = usePort<Request, Response>('chatgpt');
     const [step, setStep] = useState<Step>('choosing');
     const [data, setData] = useState('');
     const [error, setError] = useState('');
+    const [useOpenAI, setUseOpenAI] = useState(false);
+    const [openAIKey, setOpenAIKey] = useState('');
+    const ai = usePort<Request, Response>(useOpenAI ? 'openai' : 'chatgpt');
 
     function generate() {
         ai.send({ type: 'ask', data: article });
@@ -29,6 +32,24 @@ export default function Generator({ article }: Props) {
     function changeText(e: React.ChangeEvent<HTMLTextAreaElement>) {
         setData(e.target.value);
     }
+
+    function checkOpenAI(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = !!e.target.checked;
+        option('useOpenAI', value);
+        setUseOpenAI(value);
+    }
+
+    function inputOpenAIKey(e: React.ChangeEvent<HTMLInputElement>) {
+        option('openAIKey', e.target.value);
+        setOpenAIKey(e.target.value);
+    }
+
+    useEffect(() => {
+        (async () => {
+            setUseOpenAI(!!await option('useOpenAI'));
+            setOpenAIKey(await option('openAIKey') || '');
+        })();
+    }, []);
 
     useEffect(() => {
         if (!ai.data) {
@@ -61,7 +82,16 @@ export default function Generator({ article }: Props) {
             case 'choosing':
                 return <div className='mask'>
                     <div className='dialog'>
-                        <button onClick={generate}>{__('btnGenerate')}</button>
+                        <div className='full'>
+                            <button onClick={generate}>{__('btnGenerate')}</button>
+                        </div>
+                        <div className='full'>
+                            <input type='checkbox' checked={useOpenAI} onChange={checkOpenAI} id='check-openai' />
+                            <label htmlFor='check-openai'>{__('checkOpenAI')}</label>
+                        </div>
+                        { useOpenAI ? <div className='full'>
+                            <input type='password' placeholder={__('inputOpenAIKey')} onChange={inputOpenAIKey} value={openAIKey} />
+                        </div> : null }
                     </div>
                 </div>;
             case 'waiting':

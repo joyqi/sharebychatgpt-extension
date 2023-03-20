@@ -1,6 +1,6 @@
 import type { PlasmoMessaging } from '@plasmohq/messaging';
 import { generatePromptByArticle } from '~lib/article';
-import { __, fetchStreamMessage, once } from '~lib/common';
+import { __, fetchStreamMessage, once, tryParseMessage } from '~lib/common';
 import { cache } from '~lib/expirycache';
 import { v4 as uuidv4 } from 'uuid';
 import type { Article, Request, Response } from '~lib/message';
@@ -91,7 +91,7 @@ async function ask(article: Article, signal: AbortSignal) {
                 role: 'user',
                 content: {
                     content_type: 'text',
-                    parts: [generatePromptByArticle(PROMPT, article, isPlus ? 900 : 500)]
+                    parts: [PROMPT + generatePromptByArticle(article, isPlus ? 900 : 500)]
                 }
             }
         ],
@@ -100,14 +100,6 @@ async function ask(article: Article, signal: AbortSignal) {
     };
 
     return (await request('/conversation', 'POST', body, signal)).body;
-}
-
-function tryParseMessage(message: string) {
-    try {
-        return JSON.parse(message);
-    } catch {
-        return null;
-    }
 }
 
 const handler: PlasmoMessaging.PortHandler<Request, Response> = async (req, res) => {

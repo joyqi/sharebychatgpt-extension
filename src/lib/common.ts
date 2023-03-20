@@ -37,6 +37,14 @@ export async function fetchStreamMessage(stream: ReadableStream, fn: (message: s
     }
 }
 
+export function tryParseMessage(message: string) {
+    try {
+        return JSON.parse(message);
+    } catch {
+        return null;
+    }
+}
+
 export function once<Fn extends (...args: any[]) => void>(fn: Fn) {
     let called = false;
     return (...params: Parameters<Fn>) => {

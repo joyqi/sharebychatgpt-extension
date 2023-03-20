@@ -47,7 +47,7 @@ function truncateText(text: string, length: number) {
     return result.trim();
 }
 
-export function generatePromptByArticle(prompt: string, article: Article, length: number) {
+export function generatePromptByArticle(article: Article, length: number) {
     const content = convert(article.content, {
         wordwrap: false,
         selectors: [
@@ -60,5 +60,5 @@ export function generatePromptByArticle(prompt: string, article: Article, length
         ]
     });
 
-    return prompt + truncateText(article.title + "\n" + content, length);
+    return truncateText(article.title + "\n" + content, length);
 }
