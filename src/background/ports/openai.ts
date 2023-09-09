@@ -8,14 +8,23 @@ const Endpoints = {
     API: 'https://api.openai.com/v1'
 };
 
+const Prefs = {
+    'gpt-4-32k': 16000,
+    'gpt-3.5-turbo-16k-0613': 8000,
+    'gpt-3.5-turbo-16k': 8000,
+    'gpt-3.5-turbo-0613': 4000,
+    'gpt-3.5-turbo-0301': 4000,
+    'gpt-3.5-turbo': 4000,
+};
+
 function makeMessages(text: string) {
     return [
         { role: 'system', content: 'You are a social media writer.' },
         {
             role: 'user',
-            content: 'Your write the summary post in ' + __('langInEnglish') + ' for the article I give you. '
-            + 'The post you are writing should be less than 140 characters, and make sure it is concise and catchy. '
-            + 'Now write a post in ' + __('langInEnglish') + ' without around quotes for the following article: ' + text
+            content: 'Your write a tweet in ' + __('langInEnglish') + ' for the article I give you. '
+            + 'The tweet you are writing should be less than 140 characters, and make sure it is concise and catchy. '
+            + 'The article is: ' + text
         }
     ]
 }
@@ -31,8 +40,17 @@ async function getKey() {
 }
 
 async function getModel(signal: AbortSignal) {
-    // const models = await request('/models', 'GET', undefined, signal);
-    return 'gpt-3.5-turbo-0301';
+    const resp = await request('/models', 'GET', undefined, signal);
+    const data = await resp.json();
+    const models = data.data.map((model: any) => model.id);
+
+    for (const model in Prefs) {
+        if (models.includes(model)) {
+            return [model, Prefs[model]];
+        }
+    }
+
+    return ['gpt-3.5-turbo-0301', 2000];
 }
 
 // Request to ChatGPT API with access token
@@ -60,9 +78,11 @@ async function request(path: string, method: string, body?: any, signal?: AbortS
 }
 
 async function ask(article: Article, signal: AbortSignal) {
+    const [model, length] = await getModel(signal);
+
     const body = {
-        messages: makeMessages(generatePromptByArticle(article, 800)),
-        model: await getModel(signal),
+        messages: makeMessages(generatePromptByArticle(article, length)),
+        model,
         stream: true
     };
 
